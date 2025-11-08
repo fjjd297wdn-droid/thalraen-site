@@ -165,7 +165,7 @@
       }
     }
 
-    /* HERO: full-bleed with brighter blend */
+    /* HERO: full-bleed, brighter image, blended top & bottom */
 
     .hero {
       position: relative;
@@ -180,30 +180,41 @@
 
       padding: 80px 40px 40px;
 
+      /* base background is same as site so blend is seamless */
+      background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
+    }
+
+    .hero::before {
+      /* hero image + global brighten */
+      content: "";
+      position: absolute;
+      inset: 0;
       background:
-        /* subtle dark at very top to sit under nav */
         linear-gradient(
           to bottom,
-          #05060a 0%,
-          rgba(5,6,10,0.9) 6%,
-          rgba(5,6,10,0.55) 14%,
-          rgba(5,6,10,0.32) 24%,
-          transparent 40%
-        ),
-        /* aether glow over bottle / center to lift exposure */
-        radial-gradient(
-          circle at 60% 40%,
-          rgba(var(--aether-rgba),0.22),
-          transparent 55%
-        ),
-        /* softer fade into site bg at bottom */
-        linear-gradient(
-          to bottom,
-          transparent 62%,
-          rgba(5,6,10,0.65) 82%,
-          #05060a 100%
+          rgba(255,255,255,0.14),
+          rgba(255,255,255,0.06)
         ),
         url('assets/thalraen-hero-bg.jpg') center top / cover no-repeat;
+      opacity: 1;
+      z-index: -2;
+    }
+
+    .hero::after {
+      /* soft fade at top & bottom so no hard box edge */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          to bottom,
+          var(--bg-top) 0%,
+          rgba(5,6,10,0.0) 14%,
+          rgba(5,6,10,0.0) 86%,
+          var(--bg-bottom) 100%
+        );
+      opacity: 0.98;
+      z-index: -1;
     }
 
     @media (max-width: 800px) {
@@ -217,6 +228,8 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
+      position: relative;
+      z-index: 1; /* above overlays */
     }
 
     .hero-tag {
