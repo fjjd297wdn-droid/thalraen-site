@@ -2,105 +2,678 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Thalraen — From Air. To Life.</title>
-  <meta name="description" content="Thalraen engineers portable water independence. From air. To life." />
-  <meta property="og:title" content="Thalraen — From Air. To Life.">
-  <meta property="og:description" content="Portable water independence. Elemental technology for a changing world.">
-  <meta property="og:type" content="website">
-  <link rel="icon" href="assets/favicon.png" />
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
+  <title>Thalraen | Water, anywhere.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Thalraen builds silent, portable atmospheric water systems that turn air into independent water." />
+  <style>
+    :root {
+      --bg-top: #05060a;
+      --bg-bottom: #0b0f16;
+      --aether-soft: #8cc9ff;
+      --aether-bright: #e0f4ff;
+      --aether-rgba: 140, 201, 255;
+      --text-main: #ffffff;
+      --text-soft: #d0d8e0;
+      --muted: #8a94a6;
+      --radius-xl: 32px;
+      --radius-md: 20px;
+      --radius-pill: 999px;
+      --transition-fast: 0.22s ease;
+      --shadow-soft: 0 22px 80px rgba(0, 0, 0, 0.95);
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, -system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background:
+        radial-gradient(circle at top left, rgba(var(--aether-rgba),0.06), transparent 55%),
+        linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
+      background-attachment: fixed;
+      color: var(--text-soft);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(22px);
+      background: radial-gradient(circle at top, rgba(1,3,8,0.96), transparent);
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 26px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid rgba(var(--aether-rgba), 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--aether-bright);
+      box-shadow: 0 0 14px rgba(var(--aether-rgba),0.9);
+      animation: tridentPulse 3.8s ease-in-out infinite;
+    }
+
+    .brand-name {
+      font-size: 17px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--aether-bright);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    nav a {
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      transition: all var(--transition-fast);
+      opacity: 0.9;
+    }
+
+    nav a:hover {
+      opacity: 1;
+      color: var(--aether-bright);
+      text-shadow: 0 0 10px rgba(var(--aether-rgba),0.6);
+    }
+
+    nav a.active {
+      color: var(--aether-bright);
+      background: radial-gradient(circle at top, rgba(var(--aether-rgba),0.18), rgba(0,0,0,1));
+      box-shadow: 0 0 22px rgba(0,0,0,0.95);
+    }
+
+    .nav-cta {
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(var(--aether-rgba),0.8);
+      color: var(--aether-bright);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 0 26px rgba(var(--aether-rgba),0.6);
+    }
+
+    .nav-cta span.icon {
+      font-size: 12px;
+    }
+
+    @media (max-width: 800px) {
+      .nav-inner {
+        padding-inline: 18px;
+      }
+      nav {
+        gap: 10px;
+        font-size: 9px;
+      }
+      .nav-cta {
+        display: none;
+      }
+    }
+
+    /* PAGE WRAP */
+
+    .page-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 40px 26px 70px;
+    }
+
+    @media (max-width: 800px) {
+      .page-wrap {
+        padding: 26px 18px 50px;
+      }
+    }
+
+    /* HERO: full-bleed bg */
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+
+      /* break out of .page-wrap side padding for full-width image */
+      margin-left: calc(-1 * 26px);
+      margin-right: calc(-1 * 26px);
+      width: calc(100% + 52px);
+
+      padding: 80px 40px 40px;
+      background:
+        linear-gradient(to bottom, rgba(5,7,12,0.96), rgba(5,7,12,0.985)),
+        url('assets/thalraen-hero-bg.jpg') center top / cover no-repeat;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        margin-left: calc(-1 * 18px);
+        margin-right: calc(-1 * 18px);
+        width: calc(100% + 36px);
+        padding: 70px 24px 36px;
+      }
+    }
+
+    .hero-main {
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero-tag {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--aether-bright);
+      padding: 7px 18px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(var(--aether-rgba),0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: radial-gradient(circle at 0 0, rgba(var(--aether-rgba),0.18), transparent);
+    }
+
+    .hero-tag span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(var(--aether-rgba),0.98);
+      box-shadow: 0 0 12px rgba(var(--aether-rgba),1);
+    }
+
+    .hero-title {
+      font-size: clamp(44px, 5.4vw, 64px);
+      line-height: 1.02;
+      font-weight: 400;
+      color: var(--text-main);
+    }
+
+    .hero-title span {
+      color: var(--aether-bright);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text-soft);
+    }
+
+    .hero-line {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 380px;
+    }
+
+    .hero-ctas {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      padding: 12px 28px;
+      border-radius: var(--radius-pill);
+      border: none;
+      cursor: pointer;
+      background:
+        radial-gradient(circle at 0 0, rgba(var(--aether-rgba),0.45), transparent),
+        linear-gradient(to right, rgba(var(--aether-rgba),0.98), var(--aether-bright));
+      color: #02040a;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      box-shadow: var(--shadow-soft);
+      transition: all var(--transition-fast);
+    }
+
+    .btn-primary span.icon {
+      font-size: 12px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 26px 90px rgba(0,0,0,1);
+    }
+
+    .btn-secondary {
+      padding: 11px 22px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(var(--aether-rgba),0.6);
+      background: transparent;
+      color: var(--aether-bright);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-secondary:hover {
+      background: radial-gradient(circle at top, rgba(var(--aether-rgba),0.18), transparent);
+      box-shadow: 0 0 30px rgba(var(--aether-rgba),0.6);
+    }
+
+    .hero-icons {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .hero-icon-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-icon-item span.icon {
+      font-size: 12px;
+      color: var(--aether-bright);
+      transform: translateY(1px);
+    }
+
+    /* SECTIONS */
+
+    section {
+      margin-top: 70px;
+    }
+
+    .section-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--aether-bright);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 19px;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      font-weight: 400;
+    }
+
+    .section-lead {
+      font-size: 11px;
+      color: var(--muted);
+      max-width: 360px;
+      margin-bottom: 14px;
+    }
+
+    /* TECH GRID */
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .how-card {
+      padding: 12px 12px 10px;
+      border-radius: var(--radius-md);
+      background: rgba(3,5,10,0.98);
+      border: 1px solid rgba(255,255,255,0.02);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.96);
+      font-size: 9.5px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .how-label {
+      font-size: 8px;
+      color: var(--aether-bright);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .how-title {
+      color: var(--text-main);
+      font-size: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .how-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* PROTOTYPE */
+
+    .timeline-list {
+      display: grid;
+      gap: 8px;
+      font-size: 9.5px;
+      max-width: 640px;
+    }
+
+    .timeline-item {
+      padding: 9px 10px;
+      border-radius: 16px;
+      background: rgba(3,5,10,1);
+      border: 1px solid rgba(255,255,255,0.02);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.96);
+    }
+
+    .timeline-label {
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--aether-bright);
+      margin-bottom: 2px;
+    }
+
+    .timeline-text {
+      font-size: 9.5px;
+      color: var(--text-soft);
+    }
+
+    .status-pill {
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(var(--aether-rgba),0.4);
+      font-size: 8px;
+      color: var(--aether-bright);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(2,4,9,1);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(var(--aether-rgba),0.98);
+      box-shadow: 0 0 10px rgba(var(--aether-rgba),1);
+    }
+
+    /* CONTACT */
+
+    .contact {
+      margin-top: 70px;
+      padding: 16px 14px 12px;
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at top, rgba(var(--aether-rgba),0.18), transparent 85%),
+        rgba(2,4,9,1);
+      border: 1px solid rgba(var(--aether-rgba),0.26);
+      box-shadow: 0 22px 90px rgba(0,0,0,1);
+      display: grid;
+      gap: 6px;
+      font-size: 9.5px;
+    }
+
+    .contact-label {
+      font-size: 8.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--aether-bright);
+    }
+
+    .contact a {
+      color: var(--aether-bright);
+      border-bottom: 1px solid rgba(var(--aether-rgba),0.5);
+      padding-bottom: 1px;
+    }
+
+    .footer-note {
+      font-size: 8px;
+      color: var(--muted);
+    }
+
+    /* REVEAL */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ANIMATIONS */
+
+    @keyframes tridentPulse {
+      0%, 70%, 100% { box-shadow: 0 0 10px rgba(var(--aether-rgba),0.4); }
+      40% { box-shadow: 0 0 22px rgba(var(--aether-rgba),1); }
+    }
+  </style>
 </head>
 <body>
-  <!-- Top nav (centered) -->
-  <header class="site-header">
-    <nav class="top-nav">
-      <a href="#vision">Vision</a>
+
+<header>
+  <div class="nav-inner">
+    <div class="brand-lockup">
+      <div class="brand-icon">Ψ</div>
+      <div class="brand-name">Thalraen</div>
+    </div>
+    <nav>
       <a href="#tech">Tech</a>
-      <a href="#impact">Impact</a>
+      <a href="#prototype">Prototype</a>
       <a href="#contact">Contact</a>
+      <a href="#tech" class="nav-cta">
+        <span class="icon">↗</span> Explore the tech
+      </a>
     </nav>
-  </header>
+  </div>
+</header>
+
+<main class="page-wrap">
 
   <!-- HERO -->
-  <section class="hero" id="vision" aria-label="Thalraen">
-    <div class="logo-wrap">
-      <img src="assets/trident-glow.png" alt="Thalraen trident" class="trident" />
-    </div>
-    <h1 class="hero-title">FROM AIR. TO LIFE.</h1>
-    <p class="hero-sub">Engineering portable water independence.</p>
-    <div class="cta-row">
-      <a class="cta ghost" href="#about">Discover the Vision</a>
-      <a class="cta ghost" href="mailto:partners@thalraen.com?subject=Collaboration%20inquiry">Collaborate</a>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="about-inner">
-      <div class="about-copy">
-        <h2 class="section-title">The Elemental Future</h2>
-        <p class="body">
-          Thalraen is a clean-tech company creating compact systems that draw water from air—anywhere. 
-          Designed for real-world use: quiet, efficient, portable.
-        </p>
-
-        <ul class="pills">
-          <li>Compact footprint</li>
-          <li>Engineered efficiency</li>
-          <li>Built for the field</li>
-        </ul>
+  <section class="hero">
+    <div class="hero-main">
+      <div class="hero-tag">
+        <span class="dot"></span> FROM AIR. TO LIFE. HARNESS THE UNSEEN.
       </div>
-      <div class="about-visual" aria-hidden="true">
-        <div class="halo"></div>
+
+      <div class="hero-title">
+        Water, anywhere.<br />
+        Silent. Portable. <span>Infinite.</span>
+      </div>
+
+      <div class="hero-sub">
+        Designed for the impossible.
+      </div>
+
+      <div class="hero-line">
+        Devices that pull water from air — no pipes, no noise, no grid.
+      </div>
+
+      <div class="hero-ctas">
+        <button class="btn-primary" onclick="scrollToId('tech')">
+          EXPLORE THE TECH
+          <span class="icon">⟶</span>
+        </button>
+        <button class="btn-secondary" onclick="scrollToId('contact')">
+          PARTNER WITH THALRAEN
+        </button>
+      </div>
+
+      <div class="hero-icons">
+        <div class="hero-icon-item">
+          <span class="icon">🌍</span><span>off-grid engineered</span>
+        </div>
+        <div class="hero-icon-item">
+          <span class="icon">⚙️</span><span>prototype evolving</span>
+        </div>
+        <div class="hero-icon-item">
+          <span class="icon">🤝</span><span>partner ready</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- TECHNOLOGY -->
-  <section class="tech" id="tech">
-    <h2 class="section-title">Atmospheric Water. Reinvented.</h2>
-    <div class="cards">
-      <article class="card">
-        <h3>Atmospheric Capture</h3>
-        <p>Layered cold surfaces draw moisture from air.</p>
-      </article>
-      <article class="card">
-        <h3>Filtration &amp; Purity</h3>
-        <p>Directed capillary flow. Clean output.</p>
-      </article>
-      <article class="card">
-        <h3>Built for the Field</h3>
-        <p>Tool-simple modules. Swap, not scrap.</p>
-      </article>
+  <!-- TECH -->
+  <section id="tech" class="reveal">
+    <div class="section-label">Technology</div>
+    <div class="section-title">Three moves. Nothing extra.</div>
+    <div class="section-lead">
+      High-level by intent. Details live in protected documents and working hardware.
+    </div>
+
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-label">01</div>
+        <div class="how-title">capture</div>
+        <div>Low-noise intake guides air across controlled surfaces.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-label">02</div>
+        <div class="how-title">condense</div>
+        <div>Engineered cooling zones form droplets only where designed.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-label">03</div>
+        <div class="how-title">purify &amp; isolate</div>
+        <div>Clean water is separated, filtered, and sealed from everything else.</div>
+      </div>
     </div>
   </section>
 
-  <!-- IMPACT -->
-  <section class="impact" id="impact">
-    <h2 class="section-title">Water Independence for Everyone.</h2>
-    <p class="body wide">
-      From frontline response to remote living, Thalraen delivers portable water independence—ready when the world isn’t.
-    </p>
-    <div class="map-ghost" aria-hidden="true"></div>
+  <!-- PROTOTYPE -->
+  <section id="prototype" class="reveal">
+    <div class="section-label">Prototype</div>
+    <div class="section-title">Where we are.</div>
+
+    <div class="timeline-list">
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-label">Layer 01</div>
+          <div class="timeline-text">Proof of condensation, routing, and filtration in compact hardware.</div>
+        </div>
+        <div class="status-pill">
+          <span class="status-dot"></span> established
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-label">Layer 02</div>
+          <div class="timeline-text">Refining yield per watt and silence in the Thalraen form.</div>
+        </div>
+        <div class="status-pill">
+          <span class="status-dot"></span> in motion
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-label">Layer 03</div>
+          <div class="timeline-text">Selective pilots with engineers, labs, and field teams.</div>
+        </div>
+        <div class="status-pill">
+          <span class="status-dot"></span> partner ready
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <h2 class="section-title">Build with Us</h2>
-    <div class="cta-row">
-      <a class="toggle" href="mailto:partners@thalraen.com?subject=Collaborate%20with%20Thalraen">Collaborate</a>
-      <a class="toggle" href="mailto:partners@thalraen.com?subject=Investment%20inquiry">Invest</a>
+  <section id="contact" class="contact reveal">
+    <div class="contact-label">Begin a serious conversation</div>
+    <div>
+      For collaboration, pilots, or aligned capital:<br />
+      <a href="mailto:partners@thalraen.com">partners@thalraen.com</a>
+      &nbsp;|&nbsp;
+      <a href="mailto:izaeyah@thalraen.com">izaeyah@thalraen.com</a>
     </div>
-    <p class="mini">Prefer direct email? <a href="mailto:partners@thalraen.com">partners@thalraen.com</a></p>
+    <div class="footer-note">
+      Core schematics and methods are shared only under NDA and with people building real outcomes.
+    </div>
   </section>
 
-  <footer class="footer">
-    <span>© Thalraen</span>
-    <span>San Francisco Bay Area</span>
-  </footer>
+</main>
+
+<script>
+  function scrollToId(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.14 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+  function setActiveNav() {
+    let current = "";
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= 110 && rect.bottom >= 110) current = "#" + section.id;
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === current);
+    });
+  }
+
+  document.addEventListener('scroll', setActiveNav, { passive: true });
+  window.addEventListener('load', setActiveNav);
+</script>
+
 </body>
 </html>
