@@ -46,7 +46,7 @@
       text-decoration: none;
     }
 
-    /* HEADER (transparent over hero, no solid bar) */
+    /* HEADER */
 
     header {
       position: sticky;
@@ -72,12 +72,12 @@
       gap: 10px;
     }
 
-    /* Pulsing trident logo in nav */
+    /* Pulsing trident logo */
     .brand-logo {
       width: 32px;
       height: 32px;
-      object-fit: contain;
       display: block;
+      object-fit: contain;
       border-radius: 999px;
       filter: drop-shadow(0 0 18px rgba(var(--aether-rgba), 0.98));
       animation: tridentPulse 3.8s ease-in-out infinite;
@@ -165,7 +165,7 @@
       .page-wrap { padding: 0 18px 50px; }
     }
 
-    /* HERO: full-bleed image with smooth top/bottom blend, pulled up */
+    /* HERO */
 
     .hero {
       position: relative;
@@ -178,8 +178,8 @@
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
 
-      margin-top: 0;                 /* kill generic section margin */
-      padding: 40px 40px 40px;       /* reduced top padding = less gap */
+      margin-top: 0;
+      padding: 40px 40px 40px;
       background: transparent;
     }
 
@@ -189,7 +189,6 @@
       inset: 0;
       background: url("assets/thalraen-hero-bg.jpg") center top / cover no-repeat;
       opacity: 1;
-      /* smooth blend into background */
       -webkit-mask-image: linear-gradient(
         to bottom,
         transparent 0%,
@@ -528,7 +527,7 @@
 <header>
   <div class="nav-inner">
     <div class="brand-lockup">
-      <!-- Point this src to your glowing trident PNG -->
+      <!-- Correct pulsing trident logo -->
       <img src="assets/thalraen-trident-glow.png" alt="Thalraen logo" class="brand-logo" />
       <div class="brand-name">Thalraen</div>
     </div>
