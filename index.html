@@ -240,11 +240,11 @@
       position: relative;
       z-index: 1;
 
-      /* slower, smoother fade for entire hero stack */
+      /* slower, left-to-right fade for entire hero stack */
       opacity: 0;
-      transform: translateY(22px);
-      animation: heroFadeIn 2.8s ease-out forwards;
-      animation-delay: 0.25s;
+      transform: translate(-26px, 18px);
+      animation: heroFadeIn 3.6s cubic-bezier(.23,.86,.24,1) forwards;
+      animation-delay: 0.35s;
     }
 
     .hero-tag {
@@ -286,11 +286,12 @@
       max-width: 420px;
     }
 
-    /* Group CTAs + tags so tags center under the buttons */
+    /* CTAs + tags: aligned with hero text (left) */
+
     .hero-actions {
-      display: inline-flex;
+      display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       gap: 10px;
       margin-top: 18px;
     }
@@ -300,7 +301,7 @@
       flex-wrap: wrap;
       gap: 12px;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
     }
 
     .btn-primary {
@@ -352,9 +353,9 @@
       display: flex;
       gap: 22px;
       font-size: 12px;
-      font-weight: 600; /* stronger tags */
+      font-weight: 600;
       color: var(--text-soft);
-      justify-content: center;
+      justify-content: flex-start;
       text-transform: lowercase;
     }
 
@@ -530,11 +531,15 @@
     @keyframes heroFadeIn {
       0% {
         opacity: 0;
-        transform: translateY(22px);
+        transform: translate(-26px, 18px);
+      }
+      40% {
+        opacity: 0.55;
+        transform: translate(-10px, 6px);
       }
       100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate(0, 0);
       }
     }
   </style>
