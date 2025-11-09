@@ -236,11 +236,11 @@
       position: relative;
       z-index: 1;
 
-      /* start fully hidden: hero image only */
+      /* Start hidden: hero image only, then slow entrance */
       opacity: 0;
       transform: translateX(40px);
-      animation: heroFadeIn 5s ease-out forwards;
-      animation-delay: 0.4s;
+      animation: heroFadeIn 6.5s cubic-bezier(0.23, 0.74, 0.18, 1) forwards;
+      animation-delay: 1s; /* blank beat with only image */
     }
 
     .hero-tag {
@@ -251,10 +251,6 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 0;
-      border: none;
-      border-radius: 0;
-      background: none;
     }
 
     .hero-tag .dot {
@@ -513,6 +509,7 @@
       transform: translateY(0);
     }
 
+    /* Pulsing logo */
     @keyframes tridentPulse {
       0%, 70%, 100% {
         filter: drop-shadow(0 0 10px rgba(var(--aether-rgba),0.6));
@@ -522,21 +519,13 @@
       }
     }
 
-    /* smooth 5s right-to-left hero intro */
+    /* Smooth, long, right-to-left hero text entrance */
     @keyframes heroFadeIn {
-      0% {
+      from {
         opacity: 0;
         transform: translateX(40px);
       }
-      40% {
-        opacity: 0.25;
-        transform: translateX(26px);
-      }
-      70% {
-        opacity: 0.6;
-        transform: translateX(12px);
-      }
-      100% {
+      to {
         opacity: 1;
         transform: translateX(0);
       }
