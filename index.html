@@ -156,7 +156,7 @@
       .page-wrap { padding: 26px 18px 50px; }
     }
 
-    /* HERO: full-bleed image, seamless blend */
+    /* HERO: full-bleed with seamless blend */
 
     .hero {
       position: relative;
@@ -165,33 +165,50 @@
       align-items: center;
       overflow: hidden;
 
-      /* full viewport width */
       width: 100vw;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
 
       padding: 80px 40px 40px;
 
+      background: transparent; /* we let body + overlays handle color */
+    }
+
+    /* hero image layer */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("assets/thalraen-hero-bg.jpg") center top / cover no-repeat;
+      opacity: 1;
+      z-index: -2;
+    }
+
+    /* top+bottom fade into the same bg as the site */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
       background:
-        /* fade to body bg at top (transparent lets body show) */
+        /* top fade: solid page bg at very top -> transparent */
         linear-gradient(
           to bottom,
-          rgba(5,6,10,1) 0%,
-          rgba(5,6,10,0.85) 6%,
-          rgba(5,6,10,0.35) 14%,
-          rgba(5,6,10,0.0) 24%
+          var(--bg-top) 0%,
+          rgba(5,6,10,0.95) 4%,
+          rgba(5,6,10,0.6) 10%,
+          rgba(5,6,10,0.0) 20%
         ),
-        /* fade to body bg at bottom */
+        /* bottom fade: transparent -> solid page bg */
         linear-gradient(
           to bottom,
-          rgba(5,6,10,0.0) 68%,
-          rgba(5,6,10,0.35) 84%,
-          rgba(5,6,10,0.9) 96%,
-          rgba(5,6,10,1) 100%
-        ),
-        /* hero image itself (brightened with subtle white overlay baked into gradients) */
-        url('assets/thalraen-hero-bg.jpg') center top / cover no-repeat;
-      background-color: transparent;
+          rgba(5,6,10,0.0) 70%,
+          rgba(5,6,10,0.55) 86%,
+          rgba(5,6,10,0.9) 94%,
+          var(--bg-bottom) 100%
+        );
+      mix-blend-mode: normal;
     }
 
     @media (max-width: 800px) {
@@ -238,10 +255,7 @@
 
     .hero-title span { color: var(--aether-bright); }
 
-    .hero-sub {
-      font-size: 17px;
-      color: var(--text-soft);
-    }
+    .hero-sub { font-size: 17px; color: var(--text-soft); }
 
     .hero-line {
       font-size: 14px;
@@ -327,9 +341,7 @@
 
     /* SECTIONS */
 
-    section {
-      margin-top: 70px;
-    }
+    section { margin-top: 70px; }
 
     .section-label {
       font-size: 9px;
@@ -377,10 +389,7 @@
       letter-spacing: 0.16em;
     }
 
-    .how-title {
-      color: var(--text-main);
-      font-size: 12px;
-    }
+    .how-title { color: var(--text-main); font-size: 12px; }
 
     @media (max-width: 768px) {
       .how-grid { grid-template-columns: 1fr; }
@@ -413,10 +422,7 @@
       margin-bottom: 2px;
     }
 
-    .timeline-text {
-      font-size: 9.5px;
-      color: var(--text-soft);
-    }
+    .timeline-text { font-size: 9.5px; color: var(--text-soft); }
 
     .status-pill {
       padding: 3px 9px;
@@ -465,10 +471,7 @@
       padding-bottom: 1px;
     }
 
-    .footer-note {
-      font-size: 8px;
-      color: var(--muted);
-    }
+    .footer-note { font-size: 8px; color: var(--muted); }
 
     .reveal {
       opacity: 0;
@@ -508,7 +511,6 @@
 
 <main class="page-wrap">
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-main">
       <div class="hero-tag">
@@ -543,14 +545,12 @@
     </div>
   </section>
 
-  <!-- TECH -->
   <section id="tech" class="reveal">
     <div class="section-label">Technology</div>
     <div class="section-title">Three moves. Nothing extra.</div>
     <div class="section-lead">
       High-level by intent. Details live in protected documents and working hardware.
     </div>
-
     <div class="how-grid">
       <div class="how-card">
         <div class="how-label">01</div>
@@ -570,11 +570,9 @@
     </div>
   </section>
 
-  <!-- PROTOTYPE -->
   <section id="prototype" class="reveal">
     <div class="section-label">Prototype</div>
     <div class="section-title">Where we are.</div>
-
     <div class="timeline-list">
       <div class="timeline-item">
         <div>
@@ -583,7 +581,6 @@
         </div>
         <div class="status-pill"><span class="status-dot"></span> established</div>
       </div>
-
       <div class="timeline-item">
         <div>
           <div class="timeline-label">Layer 02</div>
@@ -591,7 +588,6 @@
         </div>
         <div class="status-pill"><span class="status-dot"></span> in motion</div>
       </div>
-
       <div class="timeline-item">
         <div>
           <div class="timeline-label">Layer 03</div>
@@ -602,7 +598,6 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact" class="contact reveal">
     <div class="contact-label">Begin a serious conversation</div>
     <div>
