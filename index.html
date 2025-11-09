@@ -240,11 +240,11 @@
       position: relative;
       z-index: 1;
 
-      /* smooth fade-in for full hero stack */
+      /* slower, smoother fade for entire hero stack */
       opacity: 0;
-      transform: translateY(16px);
-      animation: heroFadeIn 1.4s ease-out forwards;
-      animation-delay: 0.18s;
+      transform: translateY(22px);
+      animation: heroFadeIn 2.8s ease-out forwards;
+      animation-delay: 0.25s;
     }
 
     .hero-tag {
@@ -286,12 +286,21 @@
       max-width: 420px;
     }
 
+    /* Group CTAs + tags so tags center under the buttons */
+    .hero-actions {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
     .hero-ctas {
-      margin-top: 16px;
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       align-items: center;
+      justify-content: center;
     }
 
     .btn-primary {
@@ -340,40 +349,17 @@
     }
 
     .hero-icons {
-      margin-top: 14px;
       display: flex;
       gap: 22px;
       font-size: 12px;
-      color: var(--muted);
-      font-weight: 600; /* boldened subheaders */
-      position: relative;
-      padding-bottom: 14px;
+      font-weight: 600; /* stronger tags */
+      color: var(--text-soft);
+      justify-content: center;
+      text-transform: lowercase;
     }
 
     .hero-icon-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
       white-space: nowrap;
-    }
-
-    /* centered underline aligned with CTAs above */
-    .hero-icons::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 0;
-      width: 340px;
-      max-width: 100%;
-      height: 1px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        rgba(var(--aether-rgba),0.55),
-        transparent
-      );
-      opacity: 0.9;
     }
 
     /* SECTIONS */
@@ -434,9 +420,7 @@
     }
 
     @media (max-width: 768px) {
-      .how-grid {
-        grid-template-columns: 1fr;
-      }
+      .how-grid { grid-template-columns: 1fr; }
     }
 
     .timeline-list {
@@ -593,19 +577,20 @@
         Devices that pull water from air — no pipes, no limits, no permission.
       </div>
 
-      <div class="hero-ctas">
-        <button class="btn-primary" onclick="scrollToId('tech')">
-          EXPLORE THE TECH
-        </button>
-        <button class="btn-secondary" onclick="scrollToId('contact')">
-          PARTNER WITH THALRAEN
-        </button>
-      </div>
-
-      <div class="hero-icons">
-        <div class="hero-icon-item">off-grid engineered</div>
-        <div class="hero-icon-item">air remastered</div>
-        <div class="hero-icon-item">partner ready</div>
+      <div class="hero-actions">
+        <div class="hero-ctas">
+          <button class="btn-primary" onclick="scrollToId('tech')">
+            EXPLORE THE TECH
+          </button>
+          <button class="btn-secondary" onclick="scrollToId('contact')">
+            PARTNER WITH THALRAEN
+          </button>
+        </div>
+        <div class="hero-icons">
+          <div class="hero-icon-item">off-grid engineered</div>
+          <div class="hero-icon-item">air remastered</div>
+          <div class="hero-icon-item">partner ready</div>
+        </div>
       </div>
     </div>
   </section>
