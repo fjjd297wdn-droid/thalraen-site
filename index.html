@@ -240,11 +240,11 @@
       position: relative;
       z-index: 1;
 
-      /* slower, left-to-right fade for entire hero stack */
+      /* extremely slow fade from right -> left */
       opacity: 0;
-      transform: translate(-26px, 18px);
-      animation: heroFadeIn 3.6s cubic-bezier(.23,.86,.24,1) forwards;
-      animation-delay: 0.35s;
+      transform: translate(40px, 0);
+      animation: heroFadeIn 5.2s cubic-bezier(.25,.9,.25,1) forwards;
+      animation-delay: 0.2s;
     }
 
     .hero-tag {
@@ -285,8 +285,6 @@
       color: var(--muted);
       max-width: 420px;
     }
-
-    /* CTAs + tags: aligned with hero text (left) */
 
     .hero-actions {
       display: flex;
@@ -528,14 +526,19 @@
       }
     }
 
+    /* slow right-to-left hero intro */
     @keyframes heroFadeIn {
       0% {
         opacity: 0;
-        transform: translate(-26px, 18px);
+        transform: translate(40px, 0);
       }
       40% {
-        opacity: 0.55;
-        transform: translate(-10px, 6px);
+        opacity: 0.25;
+        transform: translate(26px, 0);
+      }
+      70% {
+        opacity: 0.7;
+        transform: translate(10px, 0);
       }
       100% {
         opacity: 1;
