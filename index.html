@@ -156,7 +156,7 @@
       .page-wrap { padding: 26px 18px 50px; }
     }
 
-    /* HERO: full-bleed with seamless blend */
+    /* HERO: full-bleed, masked image for seamless blend */
 
     .hero {
       position: relative;
@@ -171,44 +171,46 @@
 
       padding: 80px 40px 40px;
 
-      background: transparent; /* we let body + overlays handle color */
+      background: transparent; /* body gradient shows where image is masked out */
     }
 
-    /* hero image layer */
+    /* Image layer */
     .hero::before {
       content: "";
       position: absolute;
       inset: 0;
       background: url("assets/thalraen-hero-bg.jpg") center top / cover no-repeat;
       opacity: 1;
-      z-index: -2;
+
+      /* fade image into transparency at top & bottom */
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #000 14%,
+        #000 86%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #000 14%,
+        #000 86%,
+        transparent 100%
+      );
     }
 
-    /* top+bottom fade into the same bg as the site */
+    /* No extra colors here — just reinforce edges very subtly if needed */
     .hero::after {
       content: "";
       position: absolute;
       inset: 0;
       pointer-events: none;
-      z-index: -1;
+      /* ultra-soft dark vignette so the mask edges are invisible */
       background:
-        /* top fade: solid page bg at very top -> transparent */
-        linear-gradient(
-          to bottom,
-          var(--bg-top) 0%,
-          rgba(5,6,10,0.95) 4%,
-          rgba(5,6,10,0.6) 10%,
-          rgba(5,6,10,0.0) 20%
-        ),
-        /* bottom fade: transparent -> solid page bg */
-        linear-gradient(
-          to bottom,
-          rgba(5,6,10,0.0) 70%,
-          rgba(5,6,10,0.55) 86%,
-          rgba(5,6,10,0.9) 94%,
-          var(--bg-bottom) 100%
-        );
+        radial-gradient(circle at top, rgba(5,6,10,0.6), transparent 55%) ,
+        radial-gradient(circle at bottom, rgba(5,6,10,0.7), transparent 55%);
       mix-blend-mode: normal;
+      opacity: 0.4;
     }
 
     @media (max-width: 800px) {
