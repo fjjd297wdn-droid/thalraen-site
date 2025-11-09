@@ -139,16 +139,9 @@
     }
 
     @media (max-width: 800px) {
-      .nav-inner {
-        padding-inline: 18px;
-      }
-      nav {
-        gap: 10px;
-        font-size: 9px;
-      }
-      .nav-cta {
-        display: none;
-      }
+      .nav-inner { padding-inline: 18px; }
+      nav { gap: 10px; font-size: 9px; }
+      .nav-cta { display: none; }
     }
 
     /* PAGE WRAP */
@@ -160,12 +153,10 @@
     }
 
     @media (max-width: 800px) {
-      .page-wrap {
-        padding: 26px 18px 50px;
-      }
+      .page-wrap { padding: 26px 18px 50px; }
     }
 
-    /* HERO: full-bleed, brighter image, blended top & bottom */
+    /* HERO: full-bleed image, seamless blend */
 
     .hero {
       position: relative;
@@ -174,53 +165,37 @@
       align-items: center;
       overflow: hidden;
 
+      /* full viewport width */
       width: 100vw;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
 
       padding: 80px 40px 40px;
 
-      /* base background is same as site so blend is seamless */
-      background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
-    }
-
-    .hero::before {
-      /* hero image + global brighten */
-      content: "";
-      position: absolute;
-      inset: 0;
       background:
+        /* fade to body bg at top (transparent lets body show) */
         linear-gradient(
           to bottom,
-          rgba(255,255,255,0.14),
-          rgba(255,255,255,0.06)
+          rgba(5,6,10,1) 0%,
+          rgba(5,6,10,0.85) 6%,
+          rgba(5,6,10,0.35) 14%,
+          rgba(5,6,10,0.0) 24%
         ),
-        url('assets/thalraen-hero-bg.jpg') center top / cover no-repeat;
-      opacity: 1;
-      z-index: -2;
-    }
-
-    .hero::after {
-      /* soft fade at top & bottom so no hard box edge */
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
+        /* fade to body bg at bottom */
         linear-gradient(
           to bottom,
-          var(--bg-top) 0%,
-          rgba(5,6,10,0.0) 14%,
-          rgba(5,6,10,0.0) 86%,
-          var(--bg-bottom) 100%
-        );
-      opacity: 0.98;
-      z-index: -1;
+          rgba(5,6,10,0.0) 68%,
+          rgba(5,6,10,0.35) 84%,
+          rgba(5,6,10,0.9) 96%,
+          rgba(5,6,10,1) 100%
+        ),
+        /* hero image itself (brightened with subtle white overlay baked into gradients) */
+        url('assets/thalraen-hero-bg.jpg') center top / cover no-repeat;
+      background-color: transparent;
     }
 
     @media (max-width: 800px) {
-      .hero {
-        padding: 70px 24px 36px;
-      }
+      .hero { padding: 70px 24px 36px; }
     }
 
     .hero-main {
@@ -229,7 +204,7 @@
       flex-direction: column;
       gap: 14px;
       position: relative;
-      z-index: 1; /* above overlays */
+      z-index: 1;
     }
 
     .hero-tag {
@@ -261,9 +236,7 @@
       color: var(--text-main);
     }
 
-    .hero-title span {
-      color: var(--aether-bright);
-    }
+    .hero-title span { color: var(--aether-bright); }
 
     .hero-sub {
       font-size: 17px;
@@ -303,9 +276,7 @@
       transition: all var(--transition-fast);
     }
 
-    .btn-primary span.icon {
-      font-size: 12px;
-    }
+    .btn-primary span.icon { font-size: 12px; }
 
     .btn-primary:hover {
       transform: translateY(-1px);
@@ -412,9 +383,7 @@
     }
 
     @media (max-width: 768px) {
-      .how-grid {
-        grid-template-columns: 1fr;
-      }
+      .how-grid { grid-template-columns: 1fr; }
     }
 
     .timeline-list {
@@ -539,6 +508,7 @@
 
 <main class="page-wrap">
 
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-main">
       <div class="hero-tag">
@@ -573,12 +543,14 @@
     </div>
   </section>
 
+  <!-- TECH -->
   <section id="tech" class="reveal">
     <div class="section-label">Technology</div>
     <div class="section-title">Three moves. Nothing extra.</div>
     <div class="section-lead">
       High-level by intent. Details live in protected documents and working hardware.
     </div>
+
     <div class="how-grid">
       <div class="how-card">
         <div class="how-label">01</div>
@@ -598,9 +570,11 @@
     </div>
   </section>
 
+  <!-- PROTOTYPE -->
   <section id="prototype" class="reveal">
     <div class="section-label">Prototype</div>
     <div class="section-title">Where we are.</div>
+
     <div class="timeline-list">
       <div class="timeline-item">
         <div>
@@ -609,6 +583,7 @@
         </div>
         <div class="status-pill"><span class="status-dot"></span> established</div>
       </div>
+
       <div class="timeline-item">
         <div>
           <div class="timeline-label">Layer 02</div>
@@ -616,6 +591,7 @@
         </div>
         <div class="status-pill"><span class="status-dot"></span> in motion</div>
       </div>
+
       <div class="timeline-item">
         <div>
           <div class="timeline-label">Layer 03</div>
@@ -626,6 +602,7 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact" class="contact reveal">
     <div class="contact-label">Begin a serious conversation</div>
     <div>
