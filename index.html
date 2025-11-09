@@ -19,14 +19,14 @@
       --radius-md: 20px;
       --radius-pill: 999px;
       --transition-fast: 0.22s ease;
-      --shadow-soft: 0 22px 80px rgba(0, 0, 0, 0.95);
-      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, -system-ui, sans-serif;
+      --shadow-soft: 0 22px 80px rgba(0,0,0,0.95);
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
@@ -76,7 +76,7 @@
       width: 26px;
       height: 26px;
       border-radius: 50%;
-      border: 1px solid rgba(var(--aether-rgba), 0.5);
+      border: 1px solid rgba(var(--aether-rgba),0.5);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -156,7 +156,7 @@
       .page-wrap { padding: 26px 18px 50px; }
     }
 
-    /* HERO: full-bleed, masked image for seamless blend */
+    /* HERO: full-bleed hero image with smooth top/bottom blend */
 
     .hero {
       position: relative;
@@ -170,11 +170,10 @@
       margin-right: calc(50% - 50vw);
 
       padding: 80px 40px 40px;
-
-      background: transparent; /* body gradient shows where image is masked out */
+      background: transparent; /* body bg shows where mask fades */
     }
 
-    /* Image layer */
+    /* Hero image layer */
     .hero::before {
       content: "";
       position: absolute;
@@ -182,39 +181,54 @@
       background: url("assets/thalraen-hero-bg.jpg") center top / cover no-repeat;
       opacity: 1;
 
-      /* fade image into transparency at top & bottom */
+      /* Very smooth vertical mask:
+         - slowly fades in from 0 → ~22%
+         - solid through the middle
+         - slowly fades out to 100%
+      */
       -webkit-mask-image: linear-gradient(
         to bottom,
         transparent 0%,
-        #000 14%,
-        #000 86%,
+        rgba(0,0,0,0.08) 5%,
+        rgba(0,0,0,0.25) 10%,
+        rgba(0,0,0,0.55) 16%,
+        rgba(0,0,0,0.9) 22%,
+        #000 28%,
+        #000 72%,
+        rgba(0,0,0,0.9) 78%,
+        rgba(0,0,0,0.55) 84%,
+        rgba(0,0,0,0.25) 90%,
+        rgba(0,0,0,0.08) 95%,
         transparent 100%
       );
       mask-image: linear-gradient(
         to bottom,
         transparent 0%,
-        #000 14%,
-        #000 86%,
+        rgba(0,0,0,0.08) 5%,
+        rgba(0,0,0,0.25) 10%,
+        rgba(0,0,0,0.55) 16%,
+        rgba(0,0,0,0.9) 22%,
+        #000 28%,
+        #000 72%,
+        rgba(0,0,0,0.9) 78%,
+        rgba(0,0,0,0.55) 84%,
+        rgba(0,0,0,0.25) 90%,
+        rgba(0,0,0,0.08) 95%,
         transparent 100%
       );
     }
 
-    /* No extra colors here — just reinforce edges very subtly if needed */
+    /* Subtle vignette only to hide any 1px mismatch; not a new band */
     .hero::after {
       content: "";
       position: absolute;
-      inset: 0;
+      inset: -60px 0 -60px 0;
       pointer-events: none;
-      /* ultra-soft dark vignette so the mask edges are invisible */
       background:
-        radial-gradient(circle at top, rgba(5,6,10,0.6), transparent 55%) ,
-        radial-gradient(circle at bottom, rgba(5,6,10,0.7), transparent 55%);
+        radial-gradient(circle at top, rgba(5,6,10,0.3), transparent 70%),
+        radial-gradient(circle at bottom, rgba(5,6,10,0.32), transparent 70%);
+      opacity: 0.26;
       mix-blend-mode: normal;
-      opacity: 0.4;
-    }
-
-    @media (max-width: 800px) {
-      .hero { padding: 70px 24px 36px; }
     }
 
     .hero-main {
@@ -240,7 +254,7 @@
       background: radial-gradient(circle at 0 0, rgba(var(--aether-rgba),0.25), transparent);
     }
 
-    .hero-tag span.dot {
+    .hero-tag .dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
@@ -255,9 +269,14 @@
       color: var(--text-main);
     }
 
-    .hero-title span { color: var(--aether-bright); }
+    .hero-title span {
+      color: var(--aether-bright);
+    }
 
-    .hero-sub { font-size: 17px; color: var(--text-soft); }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text-soft);
+    }
 
     .hero-line {
       font-size: 14px;
@@ -291,8 +310,6 @@
       box-shadow: var(--shadow-soft);
       transition: all var(--transition-fast);
     }
-
-    .btn-primary span.icon { font-size: 12px; }
 
     .btn-primary:hover {
       transform: translateY(-1px);
@@ -341,9 +358,11 @@
       transform: translateY(1px);
     }
 
-    /* SECTIONS */
+    /* CONTENT SECTIONS */
 
-    section { margin-top: 70px; }
+    section {
+      margin-top: 70px;
+    }
 
     .section-label {
       font-size: 9px;
@@ -391,10 +410,15 @@
       letter-spacing: 0.16em;
     }
 
-    .how-title { color: var(--text-main); font-size: 12px; }
+    .how-title {
+      color: var(--text-main);
+      font-size: 12px;
+    }
 
     @media (max-width: 768px) {
-      .how-grid { grid-template-columns: 1fr; }
+      .how-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .timeline-list {
@@ -424,7 +448,10 @@
       margin-bottom: 2px;
     }
 
-    .timeline-text { font-size: 9.5px; color: var(--text-soft); }
+    .timeline-text {
+      font-size: 9.5px;
+      color: var(--text-soft);
+    }
 
     .status-pill {
       padding: 3px 9px;
@@ -473,7 +500,10 @@
       padding-bottom: 1px;
     }
 
-    .footer-note { font-size: 8px; color: var(--muted); }
+    .footer-note {
+      font-size: 8px;
+      color: var(--muted);
+    }
 
     .reveal {
       opacity: 0;
@@ -504,19 +534,19 @@
       <a href="#tech">Tech</a>
       <a href="#prototype">Prototype</a>
       <a href="#contact">Contact</a>
-      <a href="#tech" class="nav-cta">
-        <span class="icon">↗</span> Explore the tech
-      </a>
+      <a href="#tech" class="nav-cta"><span class="icon">↗</span> EXPLORE THE TECH</a>
     </nav>
   </div>
 </header>
 
 <main class="page-wrap">
 
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-main">
       <div class="hero-tag">
-        <span class="dot"></span> FROM AIR. TO LIFE. HARNESS THE UNSEEN.
+        <div class="dot"></div>
+        FROM AIR. TO LIFE. HARNESS THE UNSEEN.
       </div>
 
       <div class="hero-title">
@@ -532,7 +562,7 @@
 
       <div class="hero-ctas">
         <button class="btn-primary" onclick="scrollToId('tech')">
-          EXPLORE THE TECH <span class="icon">⟶</span>
+          EXPLORE THE TECH
         </button>
         <button class="btn-secondary" onclick="scrollToId('contact')">
           PARTNER WITH THALRAEN
@@ -540,19 +570,21 @@
       </div>
 
       <div class="hero-icons">
-        <div class="hero-icon-item"><span class="icon">🌍</span><span>off-grid engineered</span></div>
-        <div class="hero-icon-item"><span class="icon">⚙️</span><span>prototype evolving</span></div>
-        <div class="hero-icon-item"><span class="icon">🤝</span><span>partner ready</span></div>
+        <div class="hero-icon-item">🌍 off-grid engineered</div>
+        <div class="hero-icon-item">⚙️ prototype evolving</div>
+        <div class="hero-icon-item">🤝 partner ready</div>
       </div>
     </div>
   </section>
 
+  <!-- TECHNOLOGY -->
   <section id="tech" class="reveal">
     <div class="section-label">Technology</div>
     <div class="section-title">Three moves. Nothing extra.</div>
     <div class="section-lead">
       High-level by intent. Details live in protected documents and working hardware.
     </div>
+
     <div class="how-grid">
       <div class="how-card">
         <div class="how-label">01</div>
@@ -572,34 +604,45 @@
     </div>
   </section>
 
+  <!-- PROTOTYPE -->
   <section id="prototype" class="reveal">
     <div class="section-label">Prototype</div>
     <div class="section-title">Where we are.</div>
+
     <div class="timeline-list">
       <div class="timeline-item">
         <div>
           <div class="timeline-label">Layer 01</div>
           <div class="timeline-text">Proof of condensation, routing, and filtration in compact hardware.</div>
         </div>
-        <div class="status-pill"><span class="status-dot"></span> established</div>
+        <div class="status-pill">
+          <span class="status-dot"></span> established
+        </div>
       </div>
+
       <div class="timeline-item">
         <div>
           <div class="timeline-label">Layer 02</div>
           <div class="timeline-text">Refining yield per watt and silence in the Thalraen form.</div>
         </div>
-        <div class="status-pill"><span class="status-dot"></span> in motion</div>
+        <div class="status-pill">
+          <span class="status-dot"></span> in motion
+        </div>
       </div>
+
       <div class="timeline-item">
         <div>
           <div class="timeline-label">Layer 03</div>
           <div class="timeline-text">Selective pilots with engineers, labs, and field teams.</div>
         </div>
-        <div class="status-pill"><span class="status-dot"></span> partner ready</div>
+        <div class="status-pill">
+          <span class="status-dot"></span> partner ready
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact" class="contact reveal">
     <div class="contact-label">Begin a serious conversation</div>
     <div>
