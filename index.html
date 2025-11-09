@@ -236,11 +236,11 @@
       position: relative;
       z-index: 1;
 
-      /* Start hidden: hero image only, then slow entrance */
+      /* Initially hidden: hero image alone, then long slow entrance */
       opacity: 0;
-      transform: translateX(40px);
-      animation: heroFadeIn 6.5s cubic-bezier(0.23, 0.74, 0.18, 1) forwards;
-      animation-delay: 1s; /* blank beat with only image */
+      transform: translateX(50px);
+      animation: heroFadeIn 8s cubic-bezier(0.19, 0.9, 0.22, 1) forwards;
+      animation-delay: 1s; /* 1s beat with only image */
     }
 
     .hero-tag {
@@ -519,13 +519,25 @@
       }
     }
 
-    /* Smooth, long, right-to-left hero text entrance */
+    /* Long, smooth, right-to-left hero text entrance */
     @keyframes heroFadeIn {
-      from {
+      0% {
         opacity: 0;
+        transform: translateX(50px);
+      }
+      25% {
+        opacity: 0.12;
         transform: translateX(40px);
       }
-      to {
+      50% {
+        opacity: 0.35;
+        transform: translateX(26px);
+      }
+      75% {
+        opacity: 0.7;
+        transform: translateX(12px);
+      }
+      100% {
         opacity: 1;
         transform: translateX(0);
       }
