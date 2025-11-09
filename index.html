@@ -72,7 +72,6 @@
       gap: 10px;
     }
 
-    /* Pulsing trident logo */
     .brand-logo {
       width: 32px;
       height: 32px;
@@ -242,18 +241,19 @@
       z-index: 1;
     }
 
+    /* simplified label: no capsule */
     .hero-tag {
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--aether-bright);
-      padding: 7px 18px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(var(--aether-rgba),0.35);
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: radial-gradient(circle at 0 0, rgba(var(--aether-rgba),0.25), transparent);
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      background: none;
     }
 
     .hero-tag .dot {
@@ -275,15 +275,10 @@
       color: var(--aether-bright);
     }
 
-    .hero-sub {
-      font-size: 19px;
-      color: var(--text-soft);
-    }
-
     .hero-line {
       font-size: 16px;
       color: var(--muted);
-      max-width: 380px;
+      max-width: 420px;
     }
 
     .hero-ctas {
@@ -527,7 +522,6 @@
 <header>
   <div class="nav-inner">
     <div class="brand-lockup">
-      <!-- Correct pulsing trident logo -->
       <img src="assets/thalraen-trident-glow.png" alt="Thalraen logo" class="brand-logo" />
       <div class="brand-name">Thalraen</div>
     </div>
@@ -557,10 +551,8 @@
         Silent. Portable. <span>Infinite.</span>
       </div>
 
-      <div class="hero-sub">Designed for the impossible.</div>
-
       <div class="hero-line">
-        Devices that pull water from air — no pipes, no noise, no grid.
+        Devices that pull water from air — no pipes, no limits, no permission.
       </div>
 
       <div class="hero-ctas">
@@ -573,9 +565,9 @@
       </div>
 
       <div class="hero-icons">
-        <div class="hero-icon-item">🌍 off-grid engineered</div>
-        <div class="hero-icon-item">⚙️ prototype evolving</div>
-        <div class="hero-icon-item">🤝 partner ready</div>
+        <div class="hero-icon-item">off-grid engineered</div>
+        <div class="hero-icon-item">air remastered</div>
+        <div class="hero-icon-item">partner ready</div>
       </div>
     </div>
   </section>
@@ -607,7 +599,7 @@
     </div>
   </section>
 
-  <!-- COMPANY / PROTOTYPE -->
+  <!-- COMPANY -->
   <section id="prototype" class="reveal">
     <div class="section-label">Company</div>
     <div class="section-title">Where we are.</div>
