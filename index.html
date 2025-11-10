@@ -182,36 +182,35 @@
       background: transparent;
     }
 
+    /* Full-bleed hero image, softly blended top/bottom */
     .hero::before {
       content: "";
       position: absolute;
       inset: 0;
       background: url("assets/thalraen-hero-bg.jpg") center top / cover no-repeat;
       opacity: 1;
-      -webkit-mask-image: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(0,0,0,0.1) 4%,
-        rgba(0,0,0,0.3) 10%,
-        rgba(0,0,0,0.7) 18%,
-        #000 26%,
-        #000 74%,
-        rgba(0,0,0,0.7) 82%,
-        rgba(0,0,0,0.3) 90%,
-        rgba(0,0,0,0.1) 96%,
-        transparent 100%
-      );
+      /* gentle vertical fade to blend with site bg */
+      background-color: transparent;
       mask-image: linear-gradient(
         to bottom,
         transparent 0%,
-        rgba(0,0,0,0.1) 4%,
-        rgba(0,0,0,0.3) 10%,
-        rgba(0,0,0,0.7) 18%,
-        #000 26%,
-        #000 74%,
-        rgba(0,0,0,0.7) 82%,
-        rgba(0,0,0,0.3) 90%,
-        rgba(0,0,0,0.1) 96%,
+        rgba(0,0,0,0.25) 8%,
+        rgba(0,0,0,0.9) 24%,
+        #000 40%,
+        #000 70%,
+        rgba(0,0,0,0.9) 86%,
+        rgba(0,0,0,0.25) 96%,
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0,0,0,0.25) 8%,
+        rgba(0,0,0,0.9) 24%,
+        #000 40%,
+        #000 70%,
+        rgba(0,0,0,0.9) 86%,
+        rgba(0,0,0,0.25) 96%,
         transparent 100%
       );
     }
@@ -222,9 +221,9 @@
       inset: -60px 0 -60px 0;
       pointer-events: none;
       background:
-        radial-gradient(circle at top, rgba(5,6,10,0.3), transparent 70%),
-        radial-gradient(circle at bottom, rgba(5,6,10,0.32), transparent 70%);
-      opacity: 0.26;
+        radial-gradient(circle at top, rgba(5,6,10,0.4), transparent 70%),
+        radial-gradient(circle at bottom, rgba(5,6,10,0.4), transparent 70%);
+      opacity: 0.24;
       mix-blend-mode: normal;
     }
 
@@ -236,11 +235,14 @@
       position: relative;
       z-index: 1;
 
-      /* initially hidden: hero image only, then very smooth entrance */
+      /* Start hidden; slow, smooth entrance */
       opacity: 0;
       transform: translateX(50px);
-      animation: heroFadeIn 8s cubic-bezier(0.19, 0.9, 0.22, 1) forwards;
+      animation-name: heroFadeIn;
+      animation-duration: 8s;
       animation-delay: 1s;
+      animation-fill-mode: forwards;
+      animation-timing-function: cubic-bezier(0.19, 0.9, 0.22, 1);
     }
 
     .hero-tag {
@@ -347,6 +349,7 @@
       color: var(--text-soft);
       justify-content: flex-start;
       text-transform: lowercase;
+      margin-top: 6px;
     }
 
     .hero-icon-item {
@@ -519,5 +522,195 @@
       }
     }
 
-    /* Smooth, continuous, right-to-left hero text entrance */
-    @keyframes hero
+    /* Smooth, continuous hero text entrance: right -> left, 8s */
+    @keyframes heroFadeIn {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="brand-lockup">
+      <img src="assets/thalraen-trident-glow.png" alt="Thalraen logo" class="brand-logo" />
+      <div class="brand-name">Thalraen</div>
+    </div>
+    <nav>
+      <a href="#tech">Tech</a>
+      <a href="#prototype">Company</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="nav-cta">
+        <span class="icon">↗</span> RESERVE YOURS TODAY
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main class="page-wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-main">
+      <div class="hero-tag">
+        <div class="dot"></div>
+        FROM AIR. TO LIFE. HARNESS THE UNSEEN.
+      </div>
+
+      <div class="hero-title">
+        Water, anywhere.<br />
+        Silent. Portable. <span>Infinite.</span>
+      </div>
+
+      <div class="hero-line">
+        Devices that pull water from air — no pipes, no limits, no permission.
+      </div>
+
+      <div class="hero-actions">
+        <div class="hero-ctas">
+          <button class="btn-primary" onclick="scrollToId('tech')">
+            EXPLORE THE TECH
+          </button>
+          <button class="btn-secondary" onclick="scrollToId('contact')">
+            PARTNER WITH THALRAEN
+          </button>
+        </div>
+        <div class="hero-icons">
+          <div class="hero-icon-item">off-grid engineered</div>
+          <div class="hero-icon-item">air remastered</div>
+          <div class="hero-icon-item">partner ready</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNOLOGY -->
+  <section id="tech" class="reveal">
+    <div class="section-label">Technology</div>
+    <div class="section-title">Three moves. Nothing extra.</div>
+    <div class="section-lead">
+      High-level by intent. Details live in protected documents and working hardware.
+    </div>
+
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-label">01</div>
+        <div class="how-title">capture</div>
+        <div>Low-noise intake guides air across controlled surfaces.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-label">02</div>
+        <div class="how-title">condense</div>
+        <div>Engineered cooling zones form droplets only where designed.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-label">03</div>
+        <div class="how-title">purify &amp; isolate</div>
+        <div>Clean water is separated, filtered, and sealed from everything else.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPANY -->
+  <section id="prototype" class="reveal">
+    <div class="section-label">Company</div>
+    <div class="section-title">Where we are.</div>
+
+    <div class="timeline-list">
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-label">Layer 01</div>
+          <div class="timeline-text">
+            Proof of condensation, routing, and filtration in compact hardware.
+          </div>
+        </div>
+        <div class="status-pill">
+          <span class="status-dot"></span> established
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-label">Layer 02</div>
+          <div class="timeline-text">
+            Refining yield per watt and silence in the Thalraen form.
+          </div>
+        </div>
+        <div class="status-pill">
+          <span class="status-dot"></span> in motion
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-label">Layer 03</div>
+          <div class="timeline-text">
+            Selective pilots with engineers, labs, and field teams.
+          </div>
+        </div>
+        <div class="status-pill">
+          <span class="status-dot"></span> partner ready
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / RESERVE -->
+  <section id="contact" class="contact reveal">
+    <div class="contact-label">Reserve yours today</div>
+    <div>
+      For collaboration, pilots, or aligned capital, and early unit reservations:<br />
+      <a href="mailto:partners@thalraen.com">partners@thalraen.com</a>
+      &nbsp;|&nbsp;
+      <a href="mailto:izaeyah@thalraen.com">izaeyah@thalraen.com</a>
+    </div>
+    <div class="footer-note">
+      Core schematics and methods are shared only under NDA and with people building real outcomes.
+    </div>
+  </section>
+
+</main>
+
+<script>
+  function scrollToId(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Fade-in for lower sections
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.14 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Active nav highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+  function setActiveNav() {
+    let current = "";
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= 110 && rect.bottom >= 110) current = "#" + section.id;
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === current);
+    });
+  }
+
+  document.addEventListener('scroll', setActiveNav, { passive: true });
+  window.addEventListener('load', setActiveNav);
+</script>
+
+</body>
+</html>
